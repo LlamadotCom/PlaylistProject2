@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include <string>
+
 #include "Creation.h"
 
 using namespace std;
@@ -9,6 +10,7 @@ using namespace std;
 struct Node
 {
 private:
+
     Creation creation;
     Node *next;
     Node *prev;
@@ -17,6 +19,7 @@ public:
     Node();
     Node(const Creation &c);
     string getCreation() const;
+
     void setNext(Node *n);
     void setPrev(Node *p);
     Node *getNext() const;
