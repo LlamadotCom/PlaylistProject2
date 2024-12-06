@@ -7,20 +7,21 @@
 #include <string>
 #include <vector>
 
-struct User: public Person {
+struct User : public Person
+{
 
-    private:
-        std::string userName;
-        std::vector <Playlist> playlists;
+private:
+    std::string userName;
+    std::vector<Playlist> playlists;
 
-    public:
-        User();
-        User(std::string userName);
-        User(std::string fname, std::string lname, std::string userName);
-        std::string getUserName() const;
-        void setUserName(std::string newUser);
-        void makeNewPlayList(std::string title);
-        void printPlaylists();
+public:
+    User();
+    User(std::string userName);
+    User(std::string fname, std::string lname, std::string userName);
+    std::string getUserName() const;
+    void setUserName(std::string newUser);
+    void makeNewPlayList(std::string title);
+    void printPlaylists();
 };
 
 #endif
