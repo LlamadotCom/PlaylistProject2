@@ -3,24 +3,28 @@
 
 #include <string>
 
+#include "Creation.h"
+
 using namespace std;
 
 struct Node
 {
 private:
-    string word;
+
+    Creation creation;
     Node *next;
     Node *prev;
 
 public:
     Node();
-    Node(const string &w);
-    string getWord() const;
+    Node(const Creation &c);
+    string getCreation() const;
+
     void setNext(Node *n);
     void setPrev(Node *p);
     Node *getNext() const;
     Node *getPrev() const;
-    void setWord(const string &newWord);
+    void Node::setCreation(const Creation &newCreation);
 };
 
 // Declare operator overloads as non-member functions
