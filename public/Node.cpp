@@ -1,18 +1,19 @@
 #include "Node.h"
+#include "Creation.h"
 #include <string>
 
 Node::Node() : next(nullptr), prev(nullptr) {}
 
-Node::Node(const string &w) : word(w), next(nullptr), prev(nullptr) {}
+Node::Node(const Creation &c) : creation(c), next(nullptr), prev(nullptr) {}
 
-string Node::getWord() const
+string Node::getCreation() const
 {
-    return word;
+    return "Title: " << creation->getTitle() << "\nArtist: " << creation->getCreator()->getUserName() << "\nArt Type: " << creation->getArtType();
 }
 
-void Node::setWord(const string &newWord)
+void Node::setCreation(const Creation &newCreation)
 {
-    word = newWord;
+    creation = newCreation;
 }
 
 Node *Node::getNext() const
