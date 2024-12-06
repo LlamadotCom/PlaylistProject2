@@ -1,4 +1,5 @@
 #include "Node.h"
+#include <string>
 
 Node::Node() : next(nullptr), prev(nullptr) {}
 
