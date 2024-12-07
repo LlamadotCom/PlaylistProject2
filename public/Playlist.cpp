@@ -1,34 +1,32 @@
 #include "Playlist.h"
+#include <string>
 #include <iostream>
 
 using namespace std;
 
-Playlist::Playlist() : name("Unnamed Playlist") {}
-
-Playlist::Playlist(const string &name) : name(name) {}
-
-void Playlist::addSong(const Song &song)
+Playlist::Playlist()
 {
-    songs.push_back(song);
+    this->title = "Default_Title";
+    this->listItems = new LinkedList();
 }
 
-void Playlist::showPlaylist() const
+Playlist::Playlist(string title)
 {
-    cout << "Playlist: " << name << endl;
-    if (songs.empty())
-    {
-        cout << "No songs in this playlist.\n";
-        return;
-    }
-
-    for (size_t i = 0; i < songs.size(); ++i)
-    {
-        cout << i + 1 << ". " << songs[i].getTitle() << " - "
-             << songs[i].getArtist() << endl;
-    }
+    this->title = title;
+    this->listItems = new LinkedList();
 }
 
-string Playlist::getName() const
+void Playlist::addToPlaylist(Creation c)
 {
-    return name;
+    listItems->push_back(c);
+}
+
+void Playlist::delFromPlaylist(Creation c)
+{
+    listItems->deleteWord(c);
+}
+
+bool Playlist::searchPlaylist(string searchTitle)
+{
+    listItems->linearSearch(searchTitle, "", "");
 }

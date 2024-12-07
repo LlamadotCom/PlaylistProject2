@@ -2,24 +2,22 @@
 #define PLAYLIST_H
 
 #include <string>
-#include <vector>
-#include "Song.h"
+#include "LinkedList.h"
+#include "Creation.h"
 
-using namespace std;
-
-class Playlist
+struct Playlist
 {
-public:
-    Playlist();
-    Playlist(const string &name);
-    void addSong(const Song &song);
-    void showPlaylist() const; // Display playlist contents
-
-    string getName() const; // Get playlist name
 
 private:
-    string name;
-    vector<Song> songs;
+    std::string title;
+    LinkedList *listItems;
+
+public:
+    Playlist();
+    Playlist(std::string title);
+    void addToPlaylist(Creation c);
+    void delFromPlaylist(Creation c);
+    bool searchPlaylist(std::string searchTitle);
 };
 
 #endif
