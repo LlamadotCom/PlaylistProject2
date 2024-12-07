@@ -21,7 +21,6 @@ public:
     std::string getUserName() const;
     void setUserName(std::string newUser);
     void makeNewPlayList(std::string title);
-    void printPlaylists();
 };
 
 #endif

@@ -1,127 +1,86 @@
 #include "SystemDriver.h"
-#include <iostream>
-#include <string>
-
 using namespace std;
 
-void SystemDriver::welcomeMessage()
+void SystemDriver::run()
 {
-    string userName;
-    cout << "Welcome to the Playlist Manager System!" << endl;
-    cout << "---------------------------------------" << endl;
-
-    // Ask for the user's name
-    cout << "Please enter your name: ";
-    getline(cin, userName);
-
-    // Personalized welcome message
-    cout << "Welcome " << userName << endl;
-    cout << endl;
+    cout << "Welcome to the System!\n";
+    signIn();
+    showUserMenu(); // Start with the user menu
 }
 
-void SystemDriver::mainMenuOptions()
+void SystemDriver::signIn()
 {
-    cout << "Please select one of the following:" << endl;
-    cout << "1. Login as User" << endl;
-    cout << "2. Login as Creator" << endl;
-    cout << "0. Exit" << endl;
-    cout << "Your Selection: ";
+    string name;
+    cout << "Enter your name: ";
+    getline(cin, name);
+    currentUser.setUserName(name);
+    cout << "Welcome, " << currentUser.getUserName() << "!\n";
 }
 
-void SystemDriver::userMenu()
+void SystemDriver::showUserMenu()
 {
     int choice;
     do
     {
-        cout << "\nUser Menu:" << endl;
-        cout << "1. View Playlists" << endl;
-        cout << "2. Search Playlists" << endl;
-        cout << "3. Sort Playlists" << endl;
-        cout << "0. Back to Main Menu" << endl;
-        cout << "Your Selection: ";
+        cout << "\nUser Menu:\n";
+        cout << "1. Create Playlist\n";
+        cout << "2. View Playlists\n";
+        cout << "3. Go to Creator Menu\n";
+        cout << "0. Exit\n";
+        cout << "Choose an option: ";
         cin >> choice;
+        cin.ignore(); // Clear input buffer
 
         switch (choice)
         {
         case 1:
-            cout << "Viewing Playlists..." << endl;
+            // Logic to create a playlist
             break;
         case 2:
-            cout << "Searching Playlists..." << endl;
+            // Logic to display playlists
             break;
         case 3:
-            cout << "Sorting Playlists..." << endl;
+            showCreatorMenu();
             break;
         case 0:
-            cout << "Returning to Main Menu..." << endl;
+            cout << "Goodbye!\n";
             break;
         default:
-            cout << "Invalid choice. Please try again." << endl;
+            cout << "Invalid option. Try again.\n";
         }
     } while (choice != 0);
 }
 
-void SystemDriver::creatorMenu()
+void SystemDriver::showCreatorMenu()
 {
     int choice;
     do
     {
-        cout << "\nCreator Menu:" << endl;
-        cout << "1. Add a Creation" << endl;
-        cout << "2. Delete a Creation" << endl;
-        cout << "3. View Albums" << endl;
-        cout << "0. Back to Main Menu" << endl;
-        cout << "Your Selection: ";
+        cout << "\nCreator Menu:\n";
+        cout << "1. Create Album\n";
+        cout << "2. Create Song\n";
+        cout << "3. Create Podcast\n";
+        cout << "0. Back to User Menu\n";
+        cout << "Choose an option: ";
         cin >> choice;
+        cin.ignore(); // Clear input buffer
 
         switch (choice)
         {
         case 1:
-            cout << "Adding a Creation..." << endl;
+            // Logic to create an album
             break;
         case 2:
-            cout << "Deleting a Creation..." << endl;
+            // Logic to create a song
             break;
         case 3:
-            cout << "Viewing Albums..." << endl;
+            // Logic to create a podcast
             break;
         case 0:
-            cout << "Returning to Main Menu..." << endl;
+            cout << "Returning to User Menu...\n";
             break;
         default:
-            cout << "Invalid choice. Please try again." << endl;
+            cout << "Invalid option. Try again.\n";
         }
-    } while (choice != 0);
-}
-
-void SystemDriver::handleMenuChoice(int choice)
-{
-    switch (choice)
-    {
-    case 1:
-        cout << "Login as User selected." << endl;
-        userMenu();
-        break;
-    case 2:
-        cout << "Login as Creator selected." << endl;
-        creatorMenu();
-        break;
-    case 0:
-        cout << "Exiting the system. Goodbye!" << endl;
-        break;
-    default:
-        cout << "Invalid choice. Please try again." << endl;
-        break;
-    }
-}
-
-void SystemDriver::userOrCreator()
-{
-    int choice;
-    do
-    {
-        mainMenuOptions();
-        cin >> choice;
-        handleMenuChoice(choice);
     } while (choice != 0);
 }

@@ -5,9 +5,9 @@ using namespace std;
 
 LinkedList::LinkedList() : head(nullptr), tail(nullptr), listSize(0) {}
 
-LinkedList::LinkedList(const string &wordInfo) : head(nullptr), tail(nullptr), listSize(0)
+LinkedList::LinkedList(const Creation &c) : head(nullptr), tail(nullptr), listSize(0)
 {
-    push_back(wordInfo);
+    push_back(c);
 }
 
 LinkedList::~LinkedList()
@@ -21,9 +21,9 @@ LinkedList::~LinkedList()
     }
 }
 
-void LinkedList::push_back(const string &word)
+void LinkedList::push_back(const Creation &c)
 {
-    Node *newNode = new Node(word);
+    Node *newNode = new Node(c);
     if (tail == nullptr)
     {
         head = newNode;
@@ -49,8 +49,8 @@ LinkedList &LinkedList::operator+=(LinkedList &otherList)
     Node *current = otherList.getHead();
     while (current != nullptr)
     {
-        push_back((*current).getWord()); // Add the current node's word to this list
-        current = (*current).getNext();  // Move to the next node
+        push_back((*current).getCreation()); // Add the current node's word to this list
+        current = (*current).getNext();      // Move to the next node
     }
 
     // Clear the other list after merging
@@ -59,18 +59,18 @@ LinkedList &LinkedList::operator+=(LinkedList &otherList)
     return *this; // Return the current list (the one we're appending to)
 }
 
-void LinkedList::push_back(Node *newWordNode)
+void LinkedList::push_back(Node *newCreationNode)
 {
     if (tail == nullptr)
     {
-        head = newWordNode;
-        tail = newWordNode;
+        head = newCreationNode;
+        tail = newCreationNode;
     }
     else
     {
-        (*tail).setNext(newWordNode);
-        (*newWordNode).setPrev(tail);
-        tail = newWordNode;
+        (*tail).setNext(newCreationNode);
+        (*newCreationNode).setPrev(tail);
+        tail = newCreationNode;
     }
     listSize++;
 }
@@ -105,7 +105,7 @@ void LinkedList::print(ostream &os)
         Node *current = head;
         while (current != nullptr)
         {
-            os << current->getWord() << endl;
+            os << current->getCreation() << endl;
             current = current->getNext();
         }
     }
@@ -122,7 +122,7 @@ void LinkedList::reversePrint(ostream &os)
         Node *current = tail;
         while (current != nullptr)
         {
-            os << current->getWord() << endl;
+            os << current->getCreation() << endl;
             current = current->getPrev();
         }
     }
@@ -153,47 +153,35 @@ void LinkedList::setSize(int s)
     listSize = s;
 }
 
-// bool LinkedList::linearSearch(const string& word) {
-//     Node* current = head;
-
-//     while (current != nullptr) {
-//         if ((*current).getWord() == word) {
-//             return true;
-//         }
-//         current = (*current).getNext();
-//     }
-//     return false;
-// }
-
 // overloaded linearSearch function
-Node *LinkedList::linearSearch(const string &word, string &prevWord, string &nextWord)
+Node *LinkedList::linearSearch(const Creation &c, string &prevCreation, string &nextCreation)
 {
     Node *current = head;
-    prevWord = "";
-    nextWord = "";
+    prevCreation = "";
+    nextCreation = "";
 
     while (current != nullptr)
     {
-        if (current->getWord() == word)
+        if (current->getCreation() == word)
         {
             // Fill previous and next words
             if (current->getPrev())
             {
-                prevWord = current->getPrev()->getWord();
+                prevCreation = current->getPrev()->getCreation();
             }
             if (current->getNext())
             {
-                nextWord = current->getNext()->getWord();
+                nextCreation = current->getNext()->getCreation();
             }
             return current; // Return the node where the word is found
         }
-        else if (current->getWord() < word)
+        else if (current->getCreation() < word)
         {
-            prevWord = current->getWord();
+            prevCreation = current->getCreation();
         }
-        else if (current->getWord() > word && nextWord.empty())
+        else if (current->getCreation() > word && nextCreation.empty())
         {
-            nextWord = current->getWord();
+            nextCreation = current->getCreation();
         }
         current = current->getNext();
     }
@@ -202,11 +190,11 @@ Node *LinkedList::linearSearch(const string &word, string &prevWord, string &nex
 }
 
 // Function to find a word in the linked list
-Node *findWord(LinkedList *lDict, string userWord)
+Node *findCreation(LinkedList *lDict, Creation searchTitle)
 {
     // Clean the input word (if needed)
     string cleanedWord;
-    for (char c : userWord)
+    for (char c : searchTitle)
     {
         if (isalpha(c))
         {                              // Keep only alphabetic characters
@@ -218,7 +206,7 @@ Node *findWord(LinkedList *lDict, string userWord)
     while (current != nullptr)
     {
         // Compare the cleaned word with the current node's word
-        if (current->getWord() == cleanedWord)
+        if (current->getCreation() == cleanedWord)
         {
             return current; // Return the node if a match is found
         }
@@ -228,7 +216,7 @@ Node *findWord(LinkedList *lDict, string userWord)
     return nullptr; // Return nullptr if the word is not found
 }
 
-Node *LinkedList::deleteWord(Node *nodeToDelete)
+Node *LinkedList::deleteCreation(Node *nodeToDelete)
 {
     if (nodeToDelete == nullptr)
     {
@@ -275,48 +263,48 @@ Node *LinkedList::deleteWord(Node *nodeToDelete)
     return nullptr;
 }
 
-void LinkedList::insert_in_order(const string &newWord)
+void LinkedList::insert_in_order(const Creation &newCreation)
 {
     Node *current = head;
     Node *prevNode = nullptr;
 
     // Traverse the list to find the correct position
-    while (current != nullptr && current->getWord() < newWord)
+    while (current != nullptr && current->getCreation() < newCreation)
     {
         prevNode = current;
         current = current->getNext();
     }
 
     // Now, check if the word is found
-    if (current != nullptr && current->getWord() == newWord)
+    if (current != nullptr && current->getCreation() == newCreation)
     {
         // Word already exists
-        cout << "Your word was '" << newWord << "'." << endl;
+        cout << "Your creation was '" << newCreation << "'." << endl;
         // Output previous and next words
         if (current->getPrev())
         {
-            cout << " The previous word would be '" << current->getPrev()->getWord() << "'." << endl;
+            cout << " The previous creation would be '" << current->getPrev()->getCreation() << "'." << endl;
         }
         else
         {
-            cout << " There is no word before " << newWord << ". It is the first word." << endl;
+            cout << " There is no creation before " << newCreation << ". It is the first creation in the list." << endl;
         }
         if (current->getNext())
         {
-            cout << " The next word would be '" << current->getNext()->getWord() << "'." << endl;
+            cout << " The next creation would be '" << current->getNext()->getCreation() << "'." << endl;
         }
         else
         {
-            cout << " There is no word after " << newWord << ". It is the last word." << endl;
+            cout << " There is no creation after " << newCreation << ". It is the last creation in the list." << endl;
         }
         return;
     }
 
     // Word not found, insert it
-    cout << "Your word was '" << newWord << "'." << endl;
-    cout << " We did not find your word. Adding word to dictionary..." << endl;
+    cout << "Your creation was '" << newCreation << "'." << endl;
+    cout << " We did not find your creation. Adding creation to playlist..." << endl;
 
-    Node *newNode = new Node(newWord);
+    Node *newNode = new Node(newCreation);
 
     if (prevNode == nullptr)
     {
@@ -354,7 +342,7 @@ void LinkedList::insert_in_order(const string &newWord)
     // Output previous and next words
     if (newNode->getPrev())
     {
-        cout << " The previous word would be '" << newNode->getPrev()->getWord() << "'." << endl;
+        cout << " The previous word would be '" << newNode->getPrev()->getCreation() << "'." << endl;
     }
     else
     {
@@ -362,7 +350,7 @@ void LinkedList::insert_in_order(const string &newWord)
     }
     if (newNode->getNext())
     {
-        cout << " The next word would be '" << newNode->getNext()->getWord() << "'." << endl;
+        cout << " The next word would be '" << newNode->getNext()->getCreation() << "'." << endl;
     }
     else
     {
@@ -370,7 +358,7 @@ void LinkedList::insert_in_order(const string &newWord)
     }
 }
 
-Node *LinkedList::insert_before(string newWord, Node *knownNode)
+Node *LinkedList::insert_before(Creation c, Node *knownNode)
 {
     if (knownNode == nullptr)
     {
@@ -379,7 +367,7 @@ Node *LinkedList::insert_before(string newWord, Node *knownNode)
     }
 
     // Create a new node
-    Node *newNode = new Node(newWord);
+    Node *newNode = new Node(c);
 
     // If knownNode is the head
     if (knownNode == head)
@@ -415,7 +403,7 @@ void LinkedList::mergeDicts(LinkedList *listB)
 
     while (currentA != nullptr && currentB != nullptr)
     {
-        if (currentA->getWord() < currentB->getWord())
+        if (currentA->getCreation() < currentB->getCreation())
         {
             Node *nextA = currentA->getNext();
 
@@ -439,7 +427,7 @@ void LinkedList::mergeDicts(LinkedList *listB)
             currentA = nextA;
             newSize++;
         }
-        else if (currentA->getWord() > currentB->getWord())
+        else if (currentA->getCreation() > currentB->getCreation())
         {
             Node *nextB = currentB->getNext();
 

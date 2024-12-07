@@ -23,3 +23,5 @@ public:
 private:
     int epNum; // Episode number of the podcast
 };
+
+#endif

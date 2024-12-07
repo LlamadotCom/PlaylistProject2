@@ -9,18 +9,18 @@ class Creation
 {
 public:
     // Constructors
-    Creation();                                                           // Default Constructor
-    Creation(string title, string artType, string genre, string creator); // Parameterized Constructor
+    Creation();                                                             // Default Constructor
+    Creation(string title, string artType, string genre, Creator *creator); // Parameterized Constructor
 
     // Getters and Setters
-    string getTitle();
+    string getTitle() const;
     void setTitle(string title);
-    string getArtType();
+    string getArtType() const;
     void setArtType(string artType);
-    string getGenre();
+    string getGenre() const;
     void setGenre(string genre);
-    string getCreator();
-    void setCreator(string creator);
+    Creator getCreator() const;
+    void setCreator(Creator *creator);
 
     // Methods
     void pause();        // Pause the creation
@@ -30,10 +30,10 @@ public:
     void showOverview(); // Display an overview of the creation
 
 private:
-    string title;   // Title of the creation
-    string artType; // Type of the artwork (e.g., Song, Podcast, Audiobook)
-    string genre;   // Genre of the creation
-    string creator; // Creator of the creation
+    string title;     // Title of the creation
+    string artType;   // Type of the artwork (e.g., Song, Podcast, Audiobook)
+    string genre;     // Genre of the creation
+    Creator *creator; // Creator of the creation
 };
 
 #endif

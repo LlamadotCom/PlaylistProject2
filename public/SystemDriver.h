@@ -1,28 +1,28 @@
 #ifndef SYSTEMDRIVER_H
 #define SYSTEMDRIVER_H
 
+#include "Playlist.h"
+#include "User.h"
+#include "Creator.h"
+#include "Person.h"
 #include <iostream>
 #include <vector>
 #include <string>
 
-// for the future
-class Playlists;
-class Creator;
+using namespace std;
 
 class SystemDriver
 {
 public:
-    void welcomeMessage();
-    void userOrCreator();
+    void run();
+    void signIn();
+    void showUserMenu();
+    void showCreatorMenu();
 
 private:
-    void mainMenuOptions();
-    void userMenu();
-    void creatorMenu();
-    void handleMenuChoice(int choice);
-
-    std::vector<Playlists *> playlists;
-    std::vector<Creator *> creators;
+    User currentUser;
+    Creator currentCreator;
+    vector<Playlist> playlists;
 };
 
 #endif

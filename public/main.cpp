@@ -3,9 +3,7 @@
 int main()
 {
     SystemDriver system;
-    system.welcomeMessage();
-    system.userOrCreator();
-
+    system.run();
     return 0;
 }
 
